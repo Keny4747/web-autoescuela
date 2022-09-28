@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+
+				<h4 class="card-title">
+					<a th:href="@{/formAuto}" class="btn btn-primary">Registrar Auto</a>
+				</h4>
+
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>PLACA</th>
+							<th>MARCA</th>
+							<th>MODELO</th>			
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="auto: ${lista}">
+							<td th:text="${auto.placa}"></td>
+							<td th:text="${auto.marca}"></td>
+							<td th:text="${auto.modelo}"></td>						
+						</tr>
+					</tbody>
+
+				</table>
+
+			</div>
+		</div>
+
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

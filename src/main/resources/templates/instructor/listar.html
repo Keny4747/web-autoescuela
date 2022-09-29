@@ -18,16 +18,23 @@
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th>PLACA</th>
-							<th>MARCA</th>
-							<th>MODELO</th>			
+							<th>ID</th>
+							<th>NOMBRE</th>
+							<th>APELLIDO</th>		
+							<th>DIRECCIÓN</th>
+							<th>TELÉFONO</th>
+							<th>FEC REGISTRO</th>	
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="auto: ${lista}">
-							<td th:text="${auto.placa}"></td>
-							<td th:text="${auto.marca}"></td>
-							<td th:text="${auto.modelo}"></td>						
+						<tr th:each="instructor: ${lista}">
+							<td th:text="${instructor.id}"></td>
+							<td th:text="${instructor.dni}"></td>
+							<td th:text="${instructor.nombre}"></td>		
+							<td th:text="${instructor.apellido}"></td>
+							<td th:text="${instructor.direccion}"></td>
+							<td th:text="${instructor.telefono}"></td>
+							<td th:text="${instructor.fecRegistro}"></td>				
 						</tr>
 					</tbody>
 

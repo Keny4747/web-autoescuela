@@ -15,24 +15,36 @@
 				<form th:action="@{/instructor/form}" th:object="${instructor}" method="post">
 				<input type="hidden" th:field="*{id}"/>
 					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Placa</label>
+						<label class="col-sm-2 col-form-label">Dni</label>
 						<div class="col-sm-6">
-							<input type="text" th:field="*{placa}" class="form-control" />
+							<input type="text" th:field="*{dni}" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Marca</label>
+						<label class="col-sm-2 col-form-label">Nombre</label>
 						<div class="col-sm-6">
-							<input type="text" th:field="*{marca}" class="form-control" />
+							<input type="text" th:field="*{nombre}" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Modelo</label>
+						<label class="col-sm-2 col-form-label">apellido</label>
 						<div class="col-sm-6">
-							<input type="text" th:field="*{modelo}" class="form-control" />
+							<input type="text" th:field="*{apellido}" class="form-control" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Telefono</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{telefono}" class="form-control" />
 						</div>
 					</div>
 					
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Direccion</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{direccion}" class="form-control" />
+						</div>
+					</div>
 					
 
 					<div class="form-group row">

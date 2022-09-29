@@ -16,6 +16,7 @@ import com.auto.web.service.IPlanService;
 
 
 @Controller
+@RequestMapping("/alumnos")
 public class AlumnoController {
 	
 	@Autowired
@@ -32,13 +33,13 @@ public class AlumnoController {
 		model.addAttribute("alumno", alumno);		
 		model.addAttribute("listaPlan", listaPlan);
 		model.addAttribute("titulo", "Registro de Alumnos");
-		return "form";
+		return "alumno/form";
 	}
 	 
 	@PostMapping("/form")
 	public String crear(Alumno alumno,Model model) {
 		alumnoServicio.create(alumno);
-		return "redirect:/listar";
+		return "redirect:/alumnos/listar";
 	}
 	
 	@GetMapping("/listar")
@@ -46,7 +47,7 @@ public class AlumnoController {
 		List<Alumno> alumnos = alumnoServicio.findAll();
 		model.addAttribute("titulo", "Lista de alumnos");
 		model.addAttribute("listaAlumnos", alumnos);
-		return "listar";
+		return "alumno/listar";
 	}
 	
 	@RequestMapping(value = "/form/{id}")
@@ -59,12 +60,12 @@ public class AlumnoController {
 			
 		} else {
 			
-			return "redirect:/listar";
+			return "redirect:/alumnos/listar";
 		}
 		model.addAttribute("alumno", alumno);
 		model.addAttribute("titulo", "Editar alumno");
 		model.addAttribute("listaPlan", planService.findAll());
-		return "form";
+		return "alumno/form";
 	}
 	
 	@RequestMapping(value = "/eliminar/{id}")
@@ -75,6 +76,6 @@ public class AlumnoController {
 			alumnoServicio.delete(id);
 			
 		}
-		return "redirect:/listar";
+		return "redirect:/alumnos/listar";
 	}
 }

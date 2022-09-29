@@ -5,17 +5,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.auto.web.models.Instructor;
 import com.auto.web.service.IInstructorService;
 
 @Controller
+@RequestMapping("/instructor")
 public class InstructorController {
 	
 
 	@Autowired
 	IInstructorService instructorService;
 	
-	@GetMapping("/formInstructor")
+	@GetMapping("/form")
 	public String form(Instructor instructor, Model model) {
 		model.addAttribute("auto", instructor);
 		model.addAttribute("titulo", "Registro de Instructor");
@@ -23,13 +26,13 @@ public class InstructorController {
 		return"instructor/form";
 	}
 	
-	@PostMapping("/formInstructor")
+	@PostMapping("/form")
 	public String crear(Instructor instructor,Model model) {
 		instructorService.create(instructor);
-		return "redirect:/listarInstructor";
+		return "redirect:/instructor/listar";
 	}
 	
-	@GetMapping("/listarInstructor")
+	@GetMapping("/listar")
 	public String listar(Model model) {
 		model.addAttribute("titulo", "Lista de Instructores");
 		model.addAttribute("lista", instructorService.findAll());

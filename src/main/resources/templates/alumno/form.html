@@ -12,7 +12,7 @@
 			<div class="card-body">
 
 				<div th:object="${alumno}"></div>
-				<form th:action="@{/form}" th:object="${alumno}" method="post">
+				<form th:action="@{/alumnos/form}" th:object="${alumno}" method="post">
 				<input type="hidden" th:field="*{id}"/>
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label">DNI</label>

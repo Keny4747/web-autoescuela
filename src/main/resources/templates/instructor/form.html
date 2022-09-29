@@ -11,8 +11,8 @@
 			<div class="card-header" th:text="${titulo}"></div>
 			<div class="card-body">
 
-				<div th:object="${auto}"></div>
-				<form th:action="@{/formInstructor}" th:object="${instructor}" method="post">
+				<div th:object="${instructor}"></div>
+				<form th:action="@{/instructor/form}" th:object="${instructor}" method="post">
 				
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label">Placa</label>

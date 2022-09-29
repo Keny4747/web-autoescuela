@@ -12,7 +12,7 @@
 			<div class="card-body">
 
 				<h4 class="card-title">
-					<a th:href="@{/form}" class="btn btn-primary">Registrar Alumno</a>
+					<a th:href="@{/alumnos/form}" class="btn btn-primary">Registrar Alumno</a>
 				</h4>
 
 				<table class="table table-striped">
@@ -44,9 +44,9 @@
 							<td th:text="${alumno.telefono}"></td>
 							<td th:text="${alumno.planes}"></td>
 							<td><a class="btn btn-primary btn-sm"
-								th:href="@{/form/} + ${alumno.id}" th:text="'editar'"></a></td>
+								th:href="@{/alumnos/form/} + ${alumno.id}" th:text="'editar'"></a></td>
 							<td><a class="btn btn-danger btn-sm"
-								th:href="@{/eliminar/} + ${alumno.id}" th:text="'eliminar'"
+								th:href="@{/alumnos/eliminar/} + ${alumno.id}" th:text="'eliminar'"
 								onclick="return confirm('Estás seguro que quieres eliminar?');"></a></td>
 
 						</tr>

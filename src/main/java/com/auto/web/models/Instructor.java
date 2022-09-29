@@ -2,22 +2,14 @@ package com.auto.web.models;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -42,10 +34,7 @@ public class Instructor implements Serializable{
 	private String telefono;
 	private String direccion;
 	
-	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
-	@JoinTable(name = "instructor_alumno", joinColumns = @JoinColumn(name = "alumno_dni"),
-	inverseJoinColumns = @JoinColumn(name="instructor_dni"))
-	private Set<Alumno> grupos = new HashSet<>();
+	
 
 	public Integer getDni() {
 		return dni;
@@ -95,13 +84,7 @@ public class Instructor implements Serializable{
 		this.direccion = direccion;
 	}
 
-	public Set<Alumno> getGrupos() {
-		return grupos;
-	}
 
-	public void setGrupos(Set<Alumno> grupos) {
-		this.grupos = grupos;
-	}
 
 	public Integer getId() {
 		return id;

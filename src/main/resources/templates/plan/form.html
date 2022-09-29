@@ -12,7 +12,7 @@
 			<div class="card-body">
 
 			
-				<form th:action="@{/formPlan}" th:object="${plan}" method="post">
+				<form th:action="@{/plan/form}" th:object="${plan}" method="post">
 				<input type="hidden" th:field="*{id}"/>
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label">Descripcion</label>

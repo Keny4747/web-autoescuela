@@ -8,11 +8,15 @@
 	<div class="container py-4">
 
 		<div >
-			<div class="card-header" th:text="${titulo}"></div>
+		
+		<h1
+			class="text-secondary border border-success border-top-0 border-left-0 border-right-0"
+			th:text="${titulo}"></h1>
+			<div class="card-header"></div>
 			<div class="card-body">
 
 				<div th:object="${alumno}"></div>
-				<form th:action="@{/alumnos/form}" th:object="${alumno}" method="post">
+				<form th:action="@{/alumno/form}" th:object="${alumno}" method="post">
 				<input type="hidden" th:field="*{id}"/>
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label">DNI</label>

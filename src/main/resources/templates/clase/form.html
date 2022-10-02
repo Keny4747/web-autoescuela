@@ -13,33 +13,38 @@
 			th:text="${titulo}"></h1>
 			<div class="card-body">
 
-				<div th:object="${auto}"></div>
-				<form th:action="@{/auto/form}" th:object="${auto}" method="post">
+				
+				<form th:action="@{/clase/form}" th:object="${clase}" method="post">
 				<input type="hidden" th:field="*{id}"/>
-					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Placa</label>
-						<div class="col-sm-6">
-							<input type="text" th:field="*{placa}" class="form-control" />
-						</div>
-					</div>
-					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Marca</label>
-						<div class="col-sm-6">
-							<input type="text" th:field="*{marca}" class="form-control" />
-						</div>
-					</div>
-					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Modelo</label>
-						<div class="col-sm-6">
-							<input type="text" th:field="*{modelo}" class="form-control" />
-						</div>
-					</div>
 					
-					
+				<input type="hidden" th:field="*{alumno}"/>
+
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Asignar Auto:</label>
+						<div class="col-sm-6">
+							<select th:field="*{auto}" class="form-control" required>
+								<th:block th:each="aut: ${autos}">
+									<option th:text="${aut.placa}" th:value="${aut.id}"></option>
+								</th:block>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Asignar Instructor:</label>
+						<div class="col-sm-6">
+							<select th:field="*{instructor}" class="form-control" required>
+								<th:block th:each="ins: ${instructores}">
+									<option th:text="${ins.nombre}+' '+${ins.apellido}" th:value="${ins.id}"></option>
+								</th:block>
+							</select>
+						</div>
+					</div>
+
 
 					<div class="form-group row">
 						<div class="col-sm-6">
-							<input type="submit" value="Registrar auto"
+							<input type="submit" value="Guardar"
 								class="btn btn-secondary" />
 						</div>
 					</div>

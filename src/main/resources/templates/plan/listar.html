@@ -6,14 +6,17 @@
 	<header th:replace="layout/layout :: header"></header>
 
 	<div class="container py-4">
-
+<h4 class="card-title">
+					<a th:href="@{/plan/form}" class="btn btn-primary">Crear Plan</a>
+				</h4>
+	<h1
+			class="text-secondary border border-success border-top-0 border-left-0 border-right-0"
+			th:text="${titulo}"></h1>
 		<div class="card bg-light">
-			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-header" ></div>
 			<div class="card-body">
 
-				<h4 class="card-title">
-					<a th:href="@{/plan/form}" class="btn btn-primary">crear Plan</a>
-				</h4>
+				
 
 				<table class="table table-striped">
 					<thead>
@@ -21,7 +24,8 @@
 						<th>ID</th>
 							<th>DESCRIPCION</th>
 							<th>CANT HORAS</th>
-							<th>PRECIO</th>		
+							<th>PRECIO</th>	
+								
 						</tr>
 					</thead>
 					<tbody>

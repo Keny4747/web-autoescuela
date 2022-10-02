@@ -15,8 +15,9 @@ import com.auto.web.service.IPlanService;
 
 
 
+
 @Controller
-@RequestMapping("/alumnos")
+@RequestMapping("/alumno")
 public class AlumnoController {
 	
 	@Autowired
@@ -39,7 +40,7 @@ public class AlumnoController {
 	@PostMapping("/form")
 	public String crear(Alumno alumno,Model model) {
 		alumnoServicio.create(alumno);
-		return "redirect:/alumnos/listar";
+		return "redirect:/alumno/listar";
 	}
 	
 	@GetMapping("/listar")
@@ -60,7 +61,7 @@ public class AlumnoController {
 			
 		} else {
 			
-			return "redirect:/alumnos/listar";
+			return "redirect:/alumno/listar";
 		}
 		model.addAttribute("alumno", alumno);
 		model.addAttribute("titulo", "Editar alumno");
@@ -76,6 +77,20 @@ public class AlumnoController {
 			alumnoServicio.delete(id);
 			
 		}
-		return "redirect:/alumnos/listar";
+		return "redirect:/alumno/listar";
+	}
+	
+	@GetMapping(value = "/ver/{id}")
+	public String ver(@PathVariable(value = "id") Integer id, Model model) {
+
+		Alumno alumno = alumnoServicio.findOne(id);
+		if (alumno == null) {
+			
+			return "redirect:/alumno/listar";
+		}
+
+		model.addAttribute("alumno", alumno);
+		model.addAttribute("titulo", "Detalle alumno: " + alumno.getNombre()+" "+alumno.getApellido());
+		return "alumno/ver";
 	}
 }

@@ -7,19 +7,22 @@
 
 	<div class="container py-4">
 
+		<h4 class="card-title">
+			<a th:href="@{/auto/form}" class="btn btn-primary">Registrar Auto</a>
+		</h4>
+		<h1
+			class="text-secondary border border-success border-top-0 border-left-0 border-right-0"
+			th:text="${titulo}"></h1>
 		<div class="card bg-light">
-			<div class="card-header" th:text="${titulo}"></div>
+
 			<div class="card-body">
 
-				<h4 class="card-title">
-					<a th:href="@{/auto/form}" class="btn btn-primary">Registrar
-						Auto</a>
-				</h4>
+
 
 				<table class="table table-striped">
 					<thead>
 						<tr>
-						<th>ID</th>
+							<th>ID</th>
 							<th>PLACA</th>
 							<th>MARCA</th>
 							<th>MODELO</th>
@@ -30,7 +33,7 @@
 					</thead>
 					<tbody>
 						<tr th:each="auto: ${lista}">
-						<td th:text="${auto.id}"></td>
+							<td th:text="${auto.id}"></td>
 							<td th:text="${auto.placa}"></td>
 							<td th:text="${auto.marca}"></td>
 							<td th:text="${auto.modelo}"></td>

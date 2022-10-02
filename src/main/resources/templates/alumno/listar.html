@@ -6,14 +6,21 @@
 	<header th:replace="layout/layout :: header"></header>
 
 	<div class="container py-4">
+	
+	<h4 class="card-title">
+					<a th:href="@{/alumno/form}" class="btn btn-primary">Registrar
+						Alumno</a>
+				</h4>
+
+		<h1
+			class="text-secondary border border-success border-top-0 border-left-0 border-right-0"
+			th:text="${titulo}"></h1>
 
 		<div class="card bg-light">
-			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-header"></div>
 			<div class="card-body">
 
-				<h4 class="card-title">
-					<a th:href="@{/alumnos/form}" class="btn btn-primary">Registrar Alumno</a>
-				</h4>
+
 
 				<table class="table table-striped">
 					<thead>
@@ -22,11 +29,9 @@
 							<th>DNI</th>
 							<th>Nombre</th>
 							<th>Apellido</th>
-							<th>Fecha Nac</th>
-							<th>Fecha Mat</th>
-							<th>Género</th>
+							<th>Genero</th>
 							<th>Telefono</th>
-							<th>Plan</th>
+							<th>Detalle</th>
 							<th>Editar</th>
 							<th>Eliminar</th>
 
@@ -38,16 +43,20 @@
 							<td th:text="${alumno.dni}"></td>
 							<td th:text="${alumno.nombre}"></td>
 							<td th:text="${alumno.apellido}"></td>
-							<td th:text="${alumno.fecNac}"></td>
-							<td th:text="${alumno.fecMatricula}"></td>
 							<td th:text="${alumno.genero}"></td>
 							<td th:text="${alumno.telefono}"></td>
-							<td th:text="${alumno.planes}"></td>
+
+
 							<td><a class="btn btn-primary btn-sm"
-								th:href="@{/alumnos/form/} + ${alumno.id}" th:text="'editar'"></a></td>
+								th:href="@{/alumno/ver/} + ${alumno.id}" th:text="'Detalle'"></a></td>
+
+							<td><a class="btn btn-primary btn-sm"
+								th:href="@{/alumno/form/} + ${alumno.id}" th:text="'editar'"></a></td>
+
 							<td><a class="btn btn-danger btn-sm"
-								th:href="@{/alumnos/eliminar/} + ${alumno.id}" th:text="'eliminar'"
-								onclick="return confirm('Estás seguro que quieres eliminar?');"></a></td>
+								th:href="@{/alumno/eliminar/} + ${alumno.id}"
+								th:text="'eliminar'"
+								onclick="return confirm('Estas seguro que quieres eliminar?');"></a></td>
 
 						</tr>
 					</tbody>

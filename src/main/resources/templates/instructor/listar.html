@@ -6,35 +6,51 @@
 	<header th:replace="layout/layout :: header"></header>
 
 	<div class="container py-4">
-
+		<h4 class="card-title">
+			<a th:href="@{/instructor/form}" class="btn btn-primary">Registrar
+				Instructor</a>
+		</h4>
+		<h1
+			class="text-secondary border border-success border-top-0 border-left-0 border-right-0"
+			th:text="${titulo}"></h1>
 		<div class="card bg-light">
-			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-header"></div>
 			<div class="card-body">
 
-				<h4 class="card-title">
-					<a th:href="@{/instructor/form}" class="btn btn-primary">Registrar Instructor</a>
-				</h4>
+
 
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th>ID</th>
-							<th>NOMBRE</th>
-							<th>APELLIDO</th>		
-							<th>DIRECCI”N</th>
-							<th>TEL…FONO</th>
-							<th>FEC REGISTRO</th>	
+							<th>Id</th>
+							<th>Dni</th>
+							<th>Nombre</th>
+							<th>Apellido</th>
+							<th>Direcci√≥n</th>
+							<th>Tel√©fono</th>
+							<th>Fec Registro</th>
+							<th>Editar</th>
+							<th>Eliminar</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="instructor: ${lista}">
 							<td th:text="${instructor.id}"></td>
 							<td th:text="${instructor.dni}"></td>
-							<td th:text="${instructor.nombre}"></td>		
+							<td th:text="${instructor.nombre}"></td>
 							<td th:text="${instructor.apellido}"></td>
 							<td th:text="${instructor.direccion}"></td>
 							<td th:text="${instructor.telefono}"></td>
-							<td th:text="${instructor.fecRegistro}"></td>				
+							<td th:text="${instructor.fecRegistro}"></td>
+
+							<td><a class="btn btn-primary btn-sm"
+								th:href="@{/instructor/form/} + ${instructor.id}"
+								th:text="'editar'"></a></td>
+
+							<td><a class="btn btn-danger btn-sm"
+								th:href="@{/instructor/eliminar/} + ${instructor.id}"
+								th:text="'eliminar'"
+								onclick="return confirm('Estas seguro que quieres eliminar?');"></a></td>
 						</tr>
 					</tbody>
 

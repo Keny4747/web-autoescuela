@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+
+
+
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>NOMBRE</th>
+							<th>APELLIDO</th>
+							<th>AUTO</th>
+							<th>INS NOMBRE</th>
+							<th>INS APELLIDO</th>
+							<th>Editar</th>
+							<th>Eliminar</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="clase: ${lista}">
+							<td th:text="${clase.id}"></td>
+							<td th:text="${clase.alumno.nombre}"></td>
+							<td th:text="${clase.alumno.apellido}"></td>
+							<td th:text="${clase.auto.placa}"></td>
+							<td th:text="${clase.instructor.nombre}"></td>
+							<td th:text="${clase.instructor.apellido}"></td>
+
+
+						</tr>
+					</tbody>
+
+				</table>
+
+			</div>
+		</div>
+
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

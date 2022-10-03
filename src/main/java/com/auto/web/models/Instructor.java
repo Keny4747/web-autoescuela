@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PostPersist;
+
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -35,7 +37,11 @@ public class Instructor implements Serializable{
 	private String direccion;
 	
 	
-
+	
+	@PostPersist
+	public void prePersist() {
+		fecRegistro=new Date();
+	}
 	public Integer getDni() {
 		return dni;
 	}

@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.auto.web.models.Alumno;
+import com.auto.web.models.Clase;
 import com.auto.web.models.Plan;
 import com.auto.web.service.IAlumnoService;
+import com.auto.web.service.IClaseService;
 import com.auto.web.service.IPlanService;
 
 
@@ -25,6 +27,9 @@ public class AlumnoController {
 	
 	@Autowired
 	IPlanService planService;
+	
+	@Autowired
+	IClaseService claseService;
 	
 	@GetMapping("/form")
 	public String form(Model model) {
@@ -84,6 +89,8 @@ public class AlumnoController {
 	public String ver(@PathVariable(value = "id") Integer id, Model model) {
 
 		Alumno alumno = alumnoServicio.findOne(id);
+		
+		List<Clase> listaClases = claseService.mostrarClases(id);
 		if (alumno == null) {
 			
 			return "redirect:/alumno/listar";
@@ -91,6 +98,7 @@ public class AlumnoController {
 
 		model.addAttribute("alumno", alumno);
 		model.addAttribute("titulo", "Detalle alumno: " + alumno.getNombre()+" "+alumno.getApellido());
+		model.addAttribute("listaClases", listaClases);
 		return "alumno/ver";
 	}
 }

@@ -38,4 +38,9 @@ public class ClaseServiceImpl implements IClaseService{
 		
 	}
 
+	@Override
+	public List<Clase> mostrarClases(Integer id) {
+		return claseRepo.mostrarClases(id);
+	}
+
 }

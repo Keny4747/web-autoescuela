@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.auto.web.models.Alumno;
 import com.auto.web.models.Clase;
 import com.auto.web.models.Plan;
@@ -49,7 +51,7 @@ public class AlumnoController {
 	}
 	 
 	@PostMapping("/form")
-	public String crear(@Valid Alumno alumno,BindingResult result ,Model model) {
+	public String crear(@Valid Alumno alumno,BindingResult result ,Model model, RedirectAttributes flash) {
 		
 		if(result.hasErrors()) {
 			Map<String, String> errores = new HashMap<>();
@@ -62,7 +64,10 @@ public class AlumnoController {
 			return "alumno/form";
 		}
 		
+		String mensajeFlash = (alumno.getId()!=null)?"Alumno editado con éxito!":"Alumno agreado con éxito!";
+		
 		alumnoServicio.create(alumno);
+		flash.addFlashAttribute("success",mensajeFlash);
 		return "redirect:/alumno/listar";
 	}
 	
@@ -75,17 +80,23 @@ public class AlumnoController {
 	}
 	
 	@RequestMapping(value = "/form/{id}")
-	public String editar(@PathVariable(value = "id") Integer id, Model model) {
+	public String editar(@PathVariable(value = "id") Integer id, Model model, RedirectAttributes flash) {
 
 		Alumno alumno = null;
 
 		if (id > 0) {
 			alumno = alumnoServicio.findOne(id);
 			
-		} else {
+			if(alumno == null) {
+				flash.addFlashAttribute("error","El ID del alumno no existe en la base de datos...");
+			}
 			
+		} else {
+			flash.addFlashAttribute("error","El ID del alumno no puede ser cero!");
 			return "redirect:/alumno/listar";
 		}
+		
+		
 		model.addAttribute("alumno", alumno);
 		model.addAttribute("titulo", "Editar alumno");
 		model.addAttribute("listaPlan", planService.findAll());
@@ -93,11 +104,12 @@ public class AlumnoController {
 	}
 	
 	@RequestMapping(value = "/eliminar/{id}")
-	public String eliminar(@PathVariable(value = "id") Integer id) {
+	public String eliminar(@PathVariable(value = "id") Integer id, RedirectAttributes flash) {
 
 		if (id > 0) {
 			
 			alumnoServicio.delete(id);
+			flash.addFlashAttribute("success","Alumno eliminado con éxito!");
 			
 		}
 		return "redirect:/alumno/listar";

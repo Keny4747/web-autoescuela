@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.auto.web.models.Auto;
 import com.auto.web.service.IAutoService;
 import com.auto.web.validation.AutoValidador;
@@ -40,7 +42,7 @@ public class AutoController {
 	}
 	
 	@PostMapping("/form")
-	public String crear(@Valid Auto auto,BindingResult result ,Model model) {
+	public String crear(@Valid Auto auto,BindingResult result ,Model model, RedirectAttributes flash) {
 		
 		//validador.validate(auto, result);
 		
@@ -51,8 +53,10 @@ public class AutoController {
 			return "auto/form";
 		}
 		
+		String mensajeFlash = (auto.getId()!=null)?"Auto editado con éxito!":"Auto agreado con éxito!";
 		
 		autoService.create(auto);
+		flash.addFlashAttribute("success",mensajeFlash);
 		return "redirect:/auto/listar";
 	}
 	
@@ -64,7 +68,7 @@ public class AutoController {
 	}
 	
 	@RequestMapping(value = "/form/{id}")
-	public String editar(@PathVariable(value = "id") Integer id, Model model) {
+	public String editar(@PathVariable(value = "id") Integer id, Model model, RedirectAttributes flash) {
 
 		Auto auto = null;
 
@@ -72,7 +76,7 @@ public class AutoController {
 			auto = autoService.findOne(id);
 			
 		} else {
-			
+			flash.addFlashAttribute("error","El ID del auto no puede ser cero!");
 			return "redirect:/auto/listar";
 		}
 		model.addAttribute("auto", auto);
@@ -81,12 +85,12 @@ public class AutoController {
 	}
 	
 	@RequestMapping(value = "/eliminar/{id}")
-	public String eliminar(@PathVariable(value = "id") Integer id) {
+	public String eliminar(@PathVariable(value = "id") Integer id, RedirectAttributes flash) {
 
 		if (id > 0) {
 			
 			autoService.delete(id);
-			
+			flash.addFlashAttribute("success","Auto eliminado con éxito!");
 		}
 		return "redirect:/auto/listar";
 	}

@@ -1,16 +1,24 @@
 package com.auto.web.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.auto.web.models.Alumno;
+import com.auto.web.models.Clase;
 import com.auto.web.models.Plan;
 import com.auto.web.service.IAlumnoService;
+import com.auto.web.service.IClaseService;
 import com.auto.web.service.IPlanService;
 
 
@@ -26,6 +34,9 @@ public class AlumnoController {
 	@Autowired
 	IPlanService planService;
 	
+	@Autowired
+	IClaseService claseService;
+	
 	@GetMapping("/form")
 	public String form(Model model) {
 		Alumno alumno = new Alumno();
@@ -38,7 +49,19 @@ public class AlumnoController {
 	}
 	 
 	@PostMapping("/form")
-	public String crear(Alumno alumno,Model model) {
+	public String crear(@Valid Alumno alumno,BindingResult result ,Model model) {
+		
+		if(result.hasErrors()) {
+			Map<String, String> errores = new HashMap<>();
+			result.getFieldErrors().forEach(err ->{
+				errores.put(err.getField(), "El campo ".concat(err.getField()).concat(" ").concat(err.getDefaultMessage()));
+			});
+			model.addAttribute("error", errores);
+			model.addAttribute("listaPlan", planService.findAll());
+			model.addAttribute("titulo", "Registro de Alumnos");
+			return "alumno/form";
+		}
+		
 		alumnoServicio.create(alumno);
 		return "redirect:/alumno/listar";
 	}
@@ -84,6 +107,8 @@ public class AlumnoController {
 	public String ver(@PathVariable(value = "id") Integer id, Model model) {
 
 		Alumno alumno = alumnoServicio.findOne(id);
+		
+		List<Clase> listaClases = claseService.mostrarClases(id);
 		if (alumno == null) {
 			
 			return "redirect:/alumno/listar";
@@ -91,6 +116,7 @@ public class AlumnoController {
 
 		model.addAttribute("alumno", alumno);
 		model.addAttribute("titulo", "Detalle alumno: " + alumno.getNombre()+" "+alumno.getApellido());
+		model.addAttribute("listaClases", listaClases);
 		return "alumno/ver";
 	}
 }

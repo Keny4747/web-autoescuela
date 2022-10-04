@@ -18,48 +18,59 @@ import javax.persistence.PostPersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "alumno")
-public class Alumno implements Serializable{
-	
-	
+public class Alumno implements Serializable {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+
+	@NotNull
 	private Integer dni;
+
+	@NotEmpty
+	@Size(min = 3, max = 20)
 	private String nombre;
+
+	@NotEmpty
+	@Size(min = 3, max = 50)
 	private String apellido;
-	
+
 	@Column(name = "fecha_nacimiento")
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fecNac;
-	
+
 	@Column(name = "fecha_matricula")
 	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fecMatricula;
 	
+	@NotEmpty
 	private String genero;
+
+	@NotEmpty()
 	@Column(nullable = false)
 	private String telefono;
-	
-	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
-	@JoinTable(name = "plan_alumno", joinColumns = @JoinColumn(name = "alumno_id"),
-	inverseJoinColumns = @JoinColumn(name="plan_id"))
+
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@JoinTable(name = "plan_alumno", joinColumns = @JoinColumn(name = "alumno_id"), inverseJoinColumns = @JoinColumn(name = "plan_id"))
 	private Set<Plan> planes;
-	
-	
+
 	@PostPersist
 	public void prePersist() {
-		fecMatricula=new Date();
+		fecMatricula = new Date();
 	}
-	
-	//Getters and setters
-	
+
+	// Getters and setters
+
 	public Integer getDni() {
 		return dni;
 	}
@@ -116,9 +127,6 @@ public class Alumno implements Serializable{
 		this.telefono = telefono;
 	}
 
-
-
-
 	public Set<Plan> getPlanes() {
 		return planes;
 	}
@@ -134,15 +142,13 @@ public class Alumno implements Serializable{
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	
+
 	@Override
 	public String toString() {
 		return "Alumno [id=" + id + ", dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", fecNac="
 				+ fecNac + ", fecMatricula=" + fecMatricula + ", genero=" + genero + ", telefono=" + telefono
 				+ ", planes=" + planes + "]";
 	}
-
 
 	/**
 	 * 

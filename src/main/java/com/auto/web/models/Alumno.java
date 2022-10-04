@@ -18,6 +18,7 @@ import javax.persistence.PostPersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -29,8 +30,14 @@ public class Alumno implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	@NotEmpty
 	private Integer dni;
+	
+	@NotEmpty
 	private String nombre;
+	
+	@NotEmpty
 	private String apellido;
 	
 	@Column(name = "fecha_nacimiento")
@@ -44,6 +51,8 @@ public class Alumno implements Serializable{
 	private Date fecMatricula;
 	
 	private String genero;
+	
+	@NotEmpty
 	@Column(nullable = false)
 	private String telefono;
 	

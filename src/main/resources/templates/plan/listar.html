@@ -22,9 +22,11 @@
 					<thead>
 						<tr>
 						<th>ID</th>
-							<th>DESCRIPCION</th>
-							<th>CANT HORAS</th>
-							<th>PRECIO</th>	
+							<th>Descripcion</th>
+							<th>Cant Horas</th>
+							<th>Precio</th>	
+							<th>Editar</th>	
+							<th>Eliminar</th>	
 								
 						</tr>
 					</thead>
@@ -33,7 +35,16 @@
 						<td th:text="${plan.id}"></td>
 							<td th:text="${plan.descripcion}"></td>
 							<td th:text="${plan.cantHoras}"></td>
-							<td th:text="${plan.precio}"></td>					
+							<td th:text="${plan.precio}"></td>	
+								
+							<td><a class="btn btn-primary btn-sm"
+								th:href="@{/plan/form/} + ${plan.id}"
+								th:text="'editar'"></a></td>
+
+							<td><a class="btn btn-danger btn-sm"
+								th:href="@{/plan/eliminar/} + ${plan.id}"
+								th:text="'eliminar'"
+								onclick="return confirm('Estas seguro que quieres eliminar?');"></a></td>			
 						</tr>
 					</tbody>
 

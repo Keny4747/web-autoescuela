@@ -16,25 +16,32 @@
 
 			
 				<form th:action="@{/plan/form}" th:object="${plan}" method="post">
+				
 				<input type="hidden" th:field="*{id}"/>
+				
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label">Descripcion</label>
 						<div class="col-sm-6">
 							<input type="text" th:field="*{descripcion}" class="form-control" />
 						</div>
 					</div>
+					<div th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}" class="text-danger"></div>
+					
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label">Cantidad Horas</label>
 						<div class="col-sm-6">
 							<input type="text" th:field="*{cantHoras}" class="form-control" />
 						</div>
 					</div>
+					<div th:if="${#fields.hasErrors('cantHoras')}" th:errors="*{cantHoras}" class="text-danger"></div>
+					
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label">Precio</label>
 						<div class="col-sm-6">
 							<input type="text" th:field="*{precio}" class="form-control" />
 						</div>
 					</div>
+					<div th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}" class="text-danger"></div>
 					
 					<div class="form-group row">
 						<div class="col-sm-6">

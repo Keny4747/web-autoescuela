@@ -27,7 +27,9 @@ public class Auto implements Serializable{
 	
 	@NotEmpty
 	private String placa;
+	@NotEmpty
 	private String marca;
+	@NotEmpty
 	private String modelo;
 	
 	@Column(name = "fecha_registro")

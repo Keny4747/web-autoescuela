@@ -48,6 +48,7 @@ public class Alumno implements Serializable {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fecNac;
 
+	
 	@Column(name = "fecha_matricula")
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")

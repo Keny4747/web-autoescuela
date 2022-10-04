@@ -28,8 +28,6 @@ public class Plan implements Serializable{
 	private double precio;
 	
 	
-	
-	
 	public Integer getId() {
 		return id;
 	}

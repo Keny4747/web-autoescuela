@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "plan_matricula")
@@ -20,10 +21,10 @@ public class Plan implements Serializable{
 	@NotEmpty
 	private String descripcion;
 	
-	@NotEmpty
+	@NotNull
 	private Integer cantHoras;
 	
-	@NotEmpty
+	@NotNull
 	private double precio;
 	
 	

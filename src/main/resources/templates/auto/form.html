@@ -16,25 +16,33 @@
 				<div th:object="${auto}"></div>
 				<form th:action="@{/auto/form}" th:object="${auto}" method="post">
 				<input type="hidden" th:field="*{id}"/>
+				
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label">Placa</label>
 						<div class="col-sm-6">
 							<input type="text" th:field="*{placa}" class="form-control" />
 						</div>
+						
 					</div>
+					<div th:if="${#fields.hasErrors('placa')}" th:errors="*{placa}" class="text-danger"></div>
+					
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label">Marca</label>
 						<div class="col-sm-6">
 							<input type="text" th:field="*{marca}" class="form-control" />
 						</div>
+						
 					</div>
+					<div th:if="${#fields.hasErrors('marca')}" th:errors="*{marca}" class="text-danger"></div>
+					
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label">Modelo</label>
 						<div class="col-sm-6">
 							<input type="text" th:field="*{modelo}" class="form-control" />
 						</div>
+						
 					</div>
-					
+					<div th:if="${#fields.hasErrors('modelo')}" th:errors="*{modelo}" class="text-danger"></div>
 					
 
 					<div class="form-group row">

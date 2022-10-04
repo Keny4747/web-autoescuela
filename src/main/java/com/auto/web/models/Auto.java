@@ -13,7 +13,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -25,10 +24,12 @@ public class Auto implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@NotEmpty
+	//@Pattern(regexp = "([A-Z]{1}[\\d][\\w]{1}[-][\\d]{3})")
 	private String placa;
+	
 	@NotEmpty
 	private String marca;
+	
 	@NotEmpty
 	private String modelo;
 	

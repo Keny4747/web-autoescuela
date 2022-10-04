@@ -12,6 +12,9 @@ import javax.persistence.PostPersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -24,8 +27,13 @@ public class Instructor implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@NotNull
 	private Integer dni;
+	
+	@NotEmpty
 	private String nombre;
+	
+	@NotEmpty
 	private String apellido;
 	
 	@Column(name = "fecha_creacion")
@@ -33,7 +41,10 @@ public class Instructor implements Serializable{
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date fecRegistro;
 	
+	@NotEmpty
 	private String telefono;
+	
+	@NotEmpty
 	private String direccion;
 	
 	

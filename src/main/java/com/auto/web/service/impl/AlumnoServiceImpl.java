@@ -3,6 +3,8 @@ package com.auto.web.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.auto.web.models.Alumno;
@@ -34,8 +36,11 @@ public class AlumnoServiceImpl implements IAlumnoService {
 	public void delete(Integer dni) {
 		alumnoRepo.deleteById(dni);
 	}
-	
-	
-	
+
+	@Override
+	public Page<Alumno> findAllPage(Pageable pageable) {	
+		return alumnoRepo.findAll(pageable);
+	}
+
 	
 }

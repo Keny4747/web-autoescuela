@@ -6,50 +6,51 @@
 	<header th:replace="layout/layout :: header"></header>
 
 	<div class="container py-4">
-<h4 class="card-title">
-					<a th:href="@{/plan/form}" class="btn btn-primary">Crear Plan</a>
-				</h4>
-	<h1
+		<h4 class="card-title">
+			<a th:href="@{/plan/form}" class="btn btn-primary">Crear Plan</a>
+		</h4>
+		<h1
 			class="text-secondary border border-success border-top-0 border-left-0 border-right-0"
 			th:text="${titulo}"></h1>
 		<div class="card bg-light">
-			<div class="card-header" ></div>
+			<div class="card-header"></div>
 			<div class="card-body">
 
-				
+
 
 				<table class="table table-striped">
 					<thead>
 						<tr>
-						<th>ID</th>
+							<th>ID</th>
 							<th>Descripcion</th>
 							<th>Cant Horas</th>
-							<th>Precio</th>	
-							<th>Editar</th>	
-							<th>Eliminar</th>	
-								
+							<th>Precio</th>
+							<th>Editar</th>
+							<th>Eliminar</th>
+
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="plan: ${lista}">
-						<td th:text="${plan.id}"></td>
+							<td th:text="${plan.id}"></td>
 							<td th:text="${plan.descripcion}"></td>
 							<td th:text="${plan.cantHoras}"></td>
-							<td th:text="${plan.precio}"></td>	
-								
+							<td th:text="${plan.precio}"></td>
+
 							<td><a class="btn btn-primary btn-sm"
-								th:href="@{/plan/form/} + ${plan.id}"
-								th:text="'editar'"></a></td>
+								th:href="@{/plan/form/} + ${plan.id}" th:text="'editar'"></a></td>
 
 							<td><a class="btn btn-danger btn-sm"
-								th:href="@{/plan/eliminar/} + ${plan.id}"
-								th:text="'eliminar'"
-								onclick="return confirm('Estas seguro que quieres eliminar?');"></a></td>			
+								th:href="@{/plan/eliminar/} + ${plan.id}" th:text="'eliminar'"
+								onclick="return confirm('Estas seguro que quieres eliminar?');"></a></td>
 						</tr>
 					</tbody>
 
 				</table>
-				
+				<!-- Pagination -->
+				<nav th:replace="/layout/layout :: paginator"></nav>
+				<!-- End pagination -->
+
 			</div>
 		</div>
 

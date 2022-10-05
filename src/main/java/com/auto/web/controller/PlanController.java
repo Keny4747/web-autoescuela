@@ -3,6 +3,9 @@ package com.auto.web.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,9 +13,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.auto.web.models.Plan;
+import com.auto.web.pagination.PageRender;
 import com.auto.web.service.IPlanService;
 
 @Controller
@@ -49,10 +53,15 @@ public class PlanController {
 	}
 
 	@GetMapping("/listar")
-	public String form(Model model) {
+	public String listar(@RequestParam(name = "page", defaultValue = "0")int page, Model model) {
 
-		model.addAttribute("lista", planService.findAll());
+		Pageable pageRequest = PageRequest.of(page, 8);
+		Page<Plan> listaPlan = planService.findAllPage(pageRequest);
+		PageRender<Plan> pageRender = new PageRender<>("/plan/listar", listaPlan); 
+		
+		model.addAttribute("lista", listaPlan);
 		model.addAttribute("titulo", "Lista de plan de estudios");
+		model.addAttribute("page", pageRender);
 		return "plan/listar";
 	}
 

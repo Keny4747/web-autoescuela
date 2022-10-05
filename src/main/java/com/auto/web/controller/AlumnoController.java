@@ -3,10 +3,12 @@ package com.auto.web.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,17 +16,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.auto.web.models.Alumno;
 import com.auto.web.models.Clase;
 import com.auto.web.models.Plan;
+import com.auto.web.pagination.PageRender;
 import com.auto.web.service.IAlumnoService;
 import com.auto.web.service.IClaseService;
 import com.auto.web.service.IPlanService;
-
-
-
 
 @Controller
 @RequestMapping("/alumno")
@@ -71,14 +72,7 @@ public class AlumnoController {
 		return "redirect:/alumno/listar";
 	}
 	
-	@GetMapping("/listar")
-	public String listar(Model model) {
-		List<Alumno> alumnos = alumnoServicio.findAll();
-		model.addAttribute("titulo", "Lista de alumnos");
-		model.addAttribute("listaAlumnos", alumnos);
-		return "alumno/listar";
-	}
-	
+
 	@RequestMapping(value = "/form/{id}")
 	public String editar(@PathVariable(value = "id") Integer id, Model model, RedirectAttributes flash) {
 
@@ -131,4 +125,28 @@ public class AlumnoController {
 		model.addAttribute("listaClases", listaClases);
 		return "alumno/ver";
 	}
+	
+	@GetMapping("/listar")
+	public String listar(@RequestParam(name = "page", defaultValue = "0")int page, Model model) {
+		
+		Pageable pageRequest = PageRequest.of(page, 8);
+		Page<Alumno> listaAlumnos = alumnoServicio.findAllPage(pageRequest);
+		PageRender<Alumno> pageRender = new PageRender<>("/alumno/listar", listaAlumnos); 
+		
+		model.addAttribute("titulo", "Lista de alumnos");
+		model.addAttribute("listaAlumnos", listaAlumnos);
+		model.addAttribute("page", pageRender);
+	
+		return "alumno/listar";
+	}
+	
+	/*
+	@GetMapping("/listar")
+	public String listar(Model model) {
+		List<Alumno> alumnos = alumnoServicio.findAll();
+		model.addAttribute("titulo", "Lista de alumnos");
+		model.addAttribute("listaAlumnos", alumnos);
+		return "alumno/listar";
+	}
+	*/
 }

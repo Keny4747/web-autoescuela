@@ -6,11 +6,11 @@
 	<header th:replace="layout/layout :: header"></header>
 
 	<div class="container py-4">
-	
-	<h4 class="card-title">
-					<a th:href="@{/alumno/form}" class="btn btn-primary">Registrar
-						Alumno</a>
-				</h4>
+
+		<h4 class="card-title">
+			<a th:href="@{/alumno/form}" class="btn btn-primary">Registrar
+				Alumno</a>
+		</h4>
 
 		<h1
 			class="text-secondary border border-success border-top-0 border-left-0 border-right-0"
@@ -62,7 +62,11 @@
 					</tbody>
 
 				</table>
-
+				
+			<!-- Pagination -->
+			<nav th:replace="/layout/layout :: paginator" ></nav>
+			<!-- End pagination -->
+				
 			</div>
 		</div>
 

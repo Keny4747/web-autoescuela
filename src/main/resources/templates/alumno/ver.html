@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="layout/layout :: head"></head>
 <body>
 
@@ -35,7 +35,7 @@
 			</div>
 		</div>
 		<h4 class="card-title">
-			<a th:href="@{/clase/form/} + ${alumno.id}" class="btn btn-primary">Registrar
+			<a sec:authorize="hasRole('ADMIN')" th:href="@{/clase/form/} + ${alumno.id}" class="btn btn-primary">Registrar
 				Clase</a>
 		</h4>
 		

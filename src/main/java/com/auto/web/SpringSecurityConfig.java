@@ -11,10 +11,14 @@ import org.springframework.security.core.userdetails.User.UserBuilder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.auto.web.auth.handler.LoginSucceesHandler;
+
 @SuppressWarnings("deprecation")
 @Configuration
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 	
+	@Autowired
+	 private LoginSucceesHandler succeesHandler;
 	
 	@Bean
 	public static BCryptPasswordEncoder passwordEncoder() {
@@ -38,14 +42,16 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/","/css/**","/js/**","/images/**","/alumno/listar","/auto/listar").permitAll()
+		http.authorizeRequests().antMatchers("/","/css/**","/js/**","/images/**","/alumno/listar","/auto/listar","/**/ver/**").permitAll()
 		.antMatchers("/alumno/ver/**").hasAnyRole("ADMIN")	
 		.antMatchers("/**/form/**").hasAnyRole("ADMIN")
 		.antMatchers("/**/eliminar/**").hasAnyRole("ADMIN")
 		.antMatchers("/**/editar/**").hasAnyRole("ADMIN")
 		.anyRequest().authenticated()
-		.and()
-			.formLogin().loginPage("/login")
+		.and()	
+			.formLogin()
+				.successHandler(succeesHandler)
+				.loginPage("/login")		
 			.permitAll()
 		.and()
 		.logout().permitAll()

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="layout/layout :: head"></head>
 <body>
 
@@ -8,7 +8,7 @@
 	<div class="container py-4">
 
 		<h4 class="card-title">
-			<a th:href="@{/alumno/form}" class="btn btn-primary">Registrar
+			<a sec:authorize="hasRole('ADMIN')" th:href="@{/alumno/form}" class="btn btn-primary">Registrar
 				Alumno</a>
 		</h4>
 
@@ -32,8 +32,8 @@
 							<th>Genero</th>
 							<th>Telefono</th>
 							<th>Detalle</th>
-							<th>Editar</th>
-							<th>Eliminar</th>
+							<th sec:authorize="hasRole('ADMIN')">Editar</th>
+							<th sec:authorize="hasRole('ADMIN')">Eliminar</th>
 
 						</tr>
 					</thead>
@@ -47,13 +47,13 @@
 							<td th:text="${alumno.telefono}"></td>
 
 
-							<td><a class="btn btn-primary btn-sm"
+							<td ><a class="btn btn-primary btn-sm"
 								th:href="@{/alumno/ver/} + ${alumno.id}" th:text="'Detalle'"></a></td>
 
-							<td><a class="btn btn-primary btn-sm"
+							<td sec:authorize="hasRole('ADMIN')"><a class="btn btn-primary btn-sm"
 								th:href="@{/alumno/form/} + ${alumno.id}" th:text="'editar'"></a></td>
 
-							<td><a class="btn btn-danger btn-sm"
+							<td sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger btn-sm"
 								th:href="@{/alumno/eliminar/} + ${alumno.id}"
 								th:text="'eliminar'"
 								onclick="return confirm('Estas seguro que quieres eliminar?');"></a></td>

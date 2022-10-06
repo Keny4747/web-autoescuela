@@ -45,6 +45,7 @@ public class AlumnoController {
 	
 	protected final Log logger = LogFactory.getLog(this.getClass());
 	
+
 	@GetMapping("/form")
 	public String form(Model model) {
 		Alumno alumno = new Alumno();
@@ -56,6 +57,7 @@ public class AlumnoController {
 		return "alumno/form";
 	}
 	 
+	
 	@PostMapping("/form")
 	public String crear(@Valid Alumno alumno,BindingResult result ,Model model, RedirectAttributes flash) {
 		
@@ -78,6 +80,7 @@ public class AlumnoController {
 	}
 	
 
+	
 	@RequestMapping(value = "/form/{id}")
 	public String editar(@PathVariable(value = "id") Integer id, Model model, RedirectAttributes flash) {
 
@@ -102,6 +105,7 @@ public class AlumnoController {
 		return "alumno/form";
 	}
 	
+	
 	@RequestMapping(value = "/eliminar/{id}")
 	public String eliminar(@PathVariable(value = "id") Integer id, RedirectAttributes flash) {
 
@@ -113,6 +117,7 @@ public class AlumnoController {
 		}
 		return "redirect:/alumno/listar";
 	}
+	
 	
 	@GetMapping(value = "/ver/{id}")
 	public String ver(@PathVariable(value = "id") Integer id, Model model) {
@@ -130,6 +135,7 @@ public class AlumnoController {
 		model.addAttribute("listaClases", listaClases);
 		return "alumno/ver";
 	}
+	
 	
 	@GetMapping("/listar")
 	public String listar(@RequestParam(name = "page", defaultValue = "0")int page, Model model, Authentication authentication) {

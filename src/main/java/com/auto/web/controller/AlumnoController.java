@@ -1,8 +1,14 @@
 package com.auto.web.controller;
 
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.apache.commons.logging.Log;
@@ -29,6 +35,8 @@ import com.auto.web.pagination.PageRender;
 import com.auto.web.service.IAlumnoService;
 import com.auto.web.service.IClaseService;
 import com.auto.web.service.IPlanService;
+import com.auto.web.view.pdf.AlumnoPdfView;
+import com.lowagie.text.DocumentException;
 
 @Controller
 @RequestMapping("/alumno")
@@ -155,6 +163,24 @@ public class AlumnoController {
 		return "alumno/listar";
 	}
 	
+	
+	@GetMapping("/exportarPDF")
+	public void exportarListadoDeAlumnos(HttpServletResponse response) throws DocumentException, IOException{
+		response.setContentType("application/pdf");
+		
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+		String fechaActual = dateFormatter.format(new Date());
+		
+		String cabecera = "Content-Disposition";
+		String valor = "attachment; filename-Alumnos_" + fechaActual + ".pdf";
+		
+		response.setHeader(cabecera, valor);
+		
+		List<Alumno> alumnos = alumnoServicio.findAll();
+		
+		AlumnoPdfView exporter = new AlumnoPdfView(alumnos);
+		exporter.exportar(response);
+	} 
 	/*
 	@GetMapping("/listar")
 	public String listar(Model model) {

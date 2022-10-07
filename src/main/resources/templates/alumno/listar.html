@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="layout/layout :: head"></head>
 <body>
 
@@ -7,10 +8,27 @@
 
 	<div class="container py-4">
 
-		<h4 class="card-title">
-			<a sec:authorize="hasRole('ADMIN')" th:href="@{/alumno/form}" class="btn btn-primary">Registrar
-				Alumno</a>
-		</h4>
+		<div class="form-group row">
+			<div class="col-sm-2">
+				<h4 class="card-title">
+					<a sec:authorize="hasRole('ADMIN')" th:href="@{/alumno/form}"
+						class="btn btn-success">Registrar Alumno</a>
+				</h4>
+			</div>
+
+			<div class="col-sm-3">
+				<h4 class="card-title">
+					<a th:href="@{/alumno/exportarPDF}" class="btn btn-danger">Exportar
+						a PDF</a>
+				</h4>
+
+			</div>
+
+		</div>
+
+
+
+
 
 		<h1
 			class="text-secondary border border-success border-top-0 border-left-0 border-right-0"
@@ -47,13 +65,15 @@
 							<td th:text="${alumno.telefono}"></td>
 
 
-							<td ><a class="btn btn-primary btn-sm"
+							<td><a class="btn btn-primary btn-sm"
 								th:href="@{/alumno/ver/} + ${alumno.id}" th:text="'Detalle'"></a></td>
 
-							<td sec:authorize="hasRole('ADMIN')"><a class="btn btn-primary btn-sm"
+							<td sec:authorize="hasRole('ADMIN')"><a
+								class="btn btn-primary btn-sm"
 								th:href="@{/alumno/form/} + ${alumno.id}" th:text="'editar'"></a></td>
 
-							<td sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger btn-sm"
+							<td sec:authorize="hasRole('ADMIN')"><a
+								class="btn btn-danger btn-sm"
 								th:href="@{/alumno/eliminar/} + ${alumno.id}"
 								th:text="'eliminar'"
 								onclick="return confirm('Estas seguro que quieres eliminar?');"></a></td>
@@ -62,11 +82,11 @@
 					</tbody>
 
 				</table>
-				
-			<!-- Pagination -->
-			<nav th:replace="/layout/layout :: paginator" ></nav>
-			<!-- End pagination -->
-				
+
+				<!-- Pagination -->
+				<nav th:replace="/layout/layout :: paginator"></nav>
+				<!-- End pagination -->
+
 			</div>
 		</div>
 

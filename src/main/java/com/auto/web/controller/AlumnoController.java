@@ -159,6 +159,7 @@ public class AlumnoController {
 		model.addAttribute("titulo", "Lista de alumnos");
 		model.addAttribute("listaAlumnos", listaAlumnos);
 		model.addAttribute("page", pageRender);
+		
 	
 		return "alumno/listar";
 	}

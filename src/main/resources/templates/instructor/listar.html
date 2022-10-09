@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="layout/layout :: head"></head>
 <body>
 
@@ -7,18 +8,17 @@
 
 	<div class="container py-4">
 		<h4 class="card-title">
-			<a sec:authorize="hasRole('ADMIN')"  th:href="@{/instructor/form}" class="btn btn-primary">Registrar
-				Instructor</a>
+			<a sec:authorize="hasRole('ADMIN')" th:href="@{/instructor/form}"
+				class="btn btn-primary">Registrar Instructor</a>
 		</h4>
 		<h1
 			class="text-secondary border border-success border-top-0 border-left-0 border-right-0"
 			th:text="${titulo}"></h1>
+			
 		<div class="card bg-light">
 			<div class="card-header"></div>
 			<div class="card-body">
-
-
-
+			
 				<table class="table table-striped">
 					<thead>
 						<tr>
@@ -29,8 +29,8 @@
 							<th>Dirección</th>
 							<th>Teléfono</th>
 							<th>Fec Registro</th>
-							<th sec:authorize="hasRole('ADMIN')" >Editar</th>
-							<th sec:authorize="hasRole('ADMIN')" >Eliminar</th>
+							<th sec:authorize="hasRole('ADMIN')">Editar</th>
+							<th sec:authorize="hasRole('ADMIN')">Eliminar</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -43,11 +43,13 @@
 							<td th:text="${instructor.telefono}"></td>
 							<td th:text="${instructor.fecRegistro}"></td>
 
-							<td sec:authorize="hasRole('ADMIN')" ><a class="btn btn-primary btn-sm"
+							<td sec:authorize="hasRole('ADMIN')"><a
+								class="btn btn-primary btn-sm"
 								th:href="@{/instructor/form/} + ${instructor.id}"
 								th:text="'editar'"></a></td>
 
-							<td sec:authorize="hasRole('ADMIN')" ><a class="btn btn-danger btn-sm"
+							<td sec:authorize="hasRole('ADMIN')"><a
+								class="btn btn-danger btn-sm"
 								th:href="@{/instructor/eliminar/} + ${instructor.id}"
 								th:text="'eliminar'"
 								onclick="return confirm('Estas seguro que quieres eliminar?');"></a></td>

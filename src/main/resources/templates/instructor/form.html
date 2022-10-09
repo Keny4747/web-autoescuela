@@ -15,65 +15,69 @@
 			<div class="card-body">
 
 				<div th:object="${instructor}"></div>
-				
+
 				<form th:action="@{/instructor/form}" th:object="${instructor}"
 					method="post">
-					
+
 					<input type="hidden" th:field="*{id}" />
-					
+
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label">Dni</label>
 						<div class="col-sm-6">
 							<input type="text" th:field="*{dni}" class="form-control" />
 						</div>
 					</div>
-					<div th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}" class="text-danger"></div>
-					
+					<div th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"
+						class="text-danger"></div>
+
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label">Nombre</label>
 						<div class="col-sm-6">
 							<input type="text" th:field="*{nombre}" class="form-control" />
 						</div>
 					</div>
-					<div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="text-danger"></div>
-					
+					<div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
+						class="text-danger"></div>
+
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label">apellido</label>
 						<div class="col-sm-6">
 							<input type="text" th:field="*{apellido}" class="form-control" />
 						</div>
 					</div>
-					<div th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}" class="text-danger"></div>
-					
+					<div th:if="${#fields.hasErrors('apellido')}"
+						th:errors="*{apellido}" class="text-danger"></div>
+
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label">Telefono</label>
 						<div class="col-sm-6">
 							<input type="text" th:field="*{telefono}" class="form-control" />
 						</div>
 					</div>
-					<div th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}" class="text-danger"></div>
-						
+					<div th:if="${#fields.hasErrors('telefono')}"
+						th:errors="*{telefono}" class="text-danger"></div>
+
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label">Direccion</label>
 						<div class="col-sm-6">
 							<input type="text" th:field="*{direccion}" class="form-control" />
 						</div>
 					</div>
-					
+
 
 					<!-- botones guardar y cancelar -->
 					<div class="form-group row">
 						<div class="col-sm-1">
 							<input type="submit" value="Guardar" class="btn btn-secondary" />
 						</div>
-						
+
 						<div class="col-sm-3">
 							<h4 class="card-title">
 								<a th:href="@{/}" class="btn btn-danger">Cancelar</a>
 							</h4>
 
 						</div>
-						
+
 					</div>
 
 					<!--fin botones guardar y cancelar -->

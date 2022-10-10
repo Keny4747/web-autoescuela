@@ -37,6 +37,7 @@ public class ClaseController {
 		Clase clase = new Clase();
 		alumno = alumnoService.findOne(id);
 		clase.setAlumno(alumno);
+	
 		
 		model.addAttribute("clase", clase);
 		model.addAttribute("alumno", alumno);
@@ -48,14 +49,12 @@ public class ClaseController {
 	
 	@PostMapping("/form")
 	public String crear(Clase clase, Model model) {
-		claseService.create(clase);
-		
+		claseService.create(clase);	
 		return "redirect:/clase/listar";
 	}
 	
 	@GetMapping("/listar")
 	public String listar(Model model) {
-
 		model.addAttribute("titulo", "Lista de clases");
 		model.addAttribute("lista", claseService.findAll());
 		return "clase/listar";
@@ -73,6 +72,7 @@ public class ClaseController {
 			
 			return "redirect:/clase/listar";
 		}
+		
 		model.addAttribute("clase", clase);
 		model.addAttribute("titulo", "Editar Clase");
 		
@@ -84,9 +84,9 @@ public class ClaseController {
 
 		if (id > 0) {
 			
-			claseService.delete(id);
-			
+			claseService.delete(id);	
 		}
+		
 		return "redirect:/clase/listar";
 	}
 }

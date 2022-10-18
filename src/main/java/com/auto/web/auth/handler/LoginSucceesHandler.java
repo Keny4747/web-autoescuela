@@ -33,6 +33,6 @@ public class LoginSucceesHandler extends SimpleUrlAuthenticationSuccessHandler {
 		}
 		
 		super.onAuthenticationSuccess(request, response, authentication);
-	}
 	
+	}
 }

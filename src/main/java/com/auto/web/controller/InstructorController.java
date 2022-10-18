@@ -27,9 +27,6 @@ public class InstructorController {
 	@Autowired
 	IInstructorService instructorService;
 	
-
-	
-
 	@GetMapping("/form")
 	public String form( Model model) {
 		Instructor instructor = new Instructor();
